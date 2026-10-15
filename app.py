@@ -33,6 +33,14 @@ def guarded(function,*args):
         raise gr.Error(str(error)) from None
 
 
+def persist_controls(key,*values):
+    workspace.save(key,values)
+
+
+def persist_editor(key,text,path,baseline):
+    workspace.save(key,editor_text=text,editor_path=path,editor_baseline=baseline)
+
+
 def generate(key,*values):
     ensure_running()
     jobs.begin('Checking model and preparing song…')
@@ -168,10 +176,10 @@ def build_demo():
         restore_outputs=[key,*values,abc,audio,current_song,score,latest_score,edit_abc,editor_text,editor_path,baseline]
         demo.load(restore,inputs=key,outputs=restore_outputs,js="(k)=>{let v=localStorage.getItem('ggf-yue2-workspace');if(!/^[a-f0-9]{32}$/.test(v||'')){v=crypto.randomUUID().replaceAll('-','');localStorage.setItem('ggf-yue2-workspace',v)}return v}")
         for control in values:
-            control.change(lambda k,*v:workspace.save(k,v),inputs=[key,*values],outputs=None,trigger_mode='always_last',api_name=False)
+            control.change(persist_controls,inputs=[key,*values],outputs=None,trigger_mode='always_last',api_name=False)
         abc.upload(lambda k,p:workspace.retain_abc(k,p),inputs=[key,abc],outputs=abc,api_name=False)
-        abc.clear(lambda k:workspace.save(k,abc=None),inputs=key,api_name=False)
-        editor_text.change(lambda k,t,p,b:workspace.save(k,editor_text=t,editor_path=p,editor_baseline=b),inputs=[key,editor_text,editor_path,baseline],api_name=False)
+        abc.clear(lambda k:workspace.save(k,abc=None) and None,inputs=key,api_name=False)
+        editor_text.change(persist_editor,inputs=[key,editor_text,editor_path,baseline],api_name=False)
         start.click(lambda:(None,None,gr.update(visible=False)),outputs=[audio,current_song,location],queue=False,api_name=False).then(
             generate,inputs=[key,*values,abc],outputs=[audio,score,location,current_song,convert_status,edit_abc,latest_score],concurrency_limit=None,api_name=False)
         stop.click(jobs.stop,outputs=activity,queue=False,api_name=False)

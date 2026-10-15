@@ -1,0 +1,7 @@
+{
+  "mirrors": [
+    {"name":"Codeberg","api":"https://codeberg.org/api/v1/repos/Cognibuild/GGF-YuE2/branches/main","archive":"https://codeberg.org/Cognibuild/GGF-YuE2/archive/{revision}.zip"},
+    {"name":"GitHub","api":"https://api.github.com/repos/gjnave/GGF-YuE2/commits/main","archive":"https://github.com/gjnave/GGF-YuE2/archive/{revision}.zip"}
+  ],
+  "required": ["app.py","yue2_gguf_gui.py","requirements.txt","setup_runtime.py","network_settings.py","lifecycle.py","update_app.py","release_sources.json","model_manifest.json","ui.css"]
+}

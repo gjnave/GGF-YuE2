@@ -1,0 +1,18 @@
+.gradio-container {max-width:1200px!important;margin:auto!important;background:#07101f!important;color:#e8eef9!important;font-family:'Segoe UI',Arial,sans-serif!important;padding:clamp(10px,2vw,24px)!important}
+body {background:#07101f!important}
+.main {padding:clamp(2px,1vw,12px)!important}
+#hero {display:flex;align-items:center;justify-content:space-between;gap:15px;padding:clamp(16px,3vw,26px);border:1px solid #34465f;border-radius:18px;background:linear-gradient(120deg,#111c2f,#172350);margin-bottom:12px}
+#hero h1 {color:#f5b942;margin:6px 0;font-size:clamp(25px,4vw,36px);line-height:1.12}
+#hero p {margin:6px 0;color:#e8eef9} #hero .eyebrow {color:#f5b942;font-size:12px;letter-spacing:2px;font-weight:700}
+#hero img {width:65px;height:65px;border-radius:12px;object-fit:contain}
+#hero a, a {color:#9dcbfa!important} #hero nav {display:flex;gap:15px;flex-wrap:wrap;font-size:13px}
+#activity {border:1px solid #507b76;border-radius:10px;padding:12px;background:#14283a;overflow-wrap:anywhere}
+[role=tablist] {gap:6px!important;flex-wrap:wrap!important} [role=tab] {color:#e8eef9!important;background:#192d47!important;border:1px solid #435570!important;border-radius:7px!important;min-height:44px;padding:10px 14px!important}
+[role=tab].selected,[role=tab][aria-selected=true] {background:#f5b942!important;color:#091425!important;font-weight:700!important}
+button.primary {background:#f5b942!important;color:#091425!important;font-weight:700!important}
+button.secondary {background:#192d47!important;color:#e8eef9!important;border:1px solid #435570!important}
+button {min-height:44px} input,textarea,select {font-size:16px!important;color:#e8eef9!important;background:#091425!important}
+option,[role=option] {background:#111c2f!important;color:#e8eef9!important}
+#score-editor textarea {font-family:Consolas,monospace;font-size:14px!important}
+footer {display:none!important} #powered {text-align:center;color:#9baec8;font-size:12px;margin-top:15px}
+@media(max-width:600px) {#hero img {width:45px;height:45px} [role=tab] {flex:1;padding:10px 6px!important} #create-row {flex-direction:column} #create-row>.column {width:100%!important;min-width:0!important}}

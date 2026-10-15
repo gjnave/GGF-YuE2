@@ -1,0 +1,20 @@
+{
+  "repository": "audio-cpp/Yue2-3B-GGUF",
+  "revision": "eb116220931de5f373d024d48800338178c7de51",
+  "files": {
+    "sidecars/yue2-generation-config.json": {"bytes": 466, "sha256": "203830cebde6e3644eb291925362990d198e66c3b6006cd11f1aaa21904bcc61"},
+    "sidecars/yue2-model-config.json": {"bytes": 959, "sha256": "ad3477bbef890bf98ae196c1e4b44779494a6231c4ab66f32708eabadf265329"},
+    "sidecars/yue2-qwen.tiktoken": {"bytes": 2561218, "sha256": "b2b1b8dfb5cc5f024bafc373121c6aba3f66f9a5a0269e243470a1de16a33186"},
+    "sidecars/yue2-vae-config.json": {"bytes": 1378, "sha256": "f0191bb9694009956de44e0c361a6f1334760be4c8f848e599bde242a54a0970"},
+    "yue2-3b-q8_0.gguf": {"bytes": 4264186432, "sha256": "f3a9e3b197bfd05aa4ae6ab2d4b93f6d57c8cc0ea39a4af7d151f58697c7cfb6"},
+    "yue2-3b-q4_0.gguf": {"bytes": 2665632320, "sha256": "97af67d7f800b362faee6e6bec806bddfcccb93f25fd3f9a1012724d95af6f4a"},
+    "yue2-vae-f16.gguf": {"bytes": 265218656, "sha256": "d4f4a05d8f291ae820cd1e43609da3fa91b56465810091a2b08c3350b751719d"}
+  },
+  "instrumental_lora": {
+    "repository": "Mothersuperior/YuE2-instrumental-cot-full-loras",
+    "revision": "947f2f4b28978b2b6c3e316e6a87925c76bf3c4b",
+    "file": "ar_lora_inst_v3abc.bf16.safetensors",
+    "bytes": 139502088,
+    "sha256": "e408fd3148b75b1165f7ddbf63db575d83bb6402a0b5f876fcb767dbcb2c5414"
+  }
+}

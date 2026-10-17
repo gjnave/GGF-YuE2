@@ -17,3 +17,5 @@ app.lock
 *.exe
 *.dll
 *.part
+/INSTALL.bat
+/UPDATE.bat

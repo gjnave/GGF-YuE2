@@ -1,31 +1,49 @@
-# YuE2 Music Studio — Get Going Fast
+![YuE2 Music Studio — Get Going Fast](assets/yue2.png)
+
+# YuE2 Music Studio (Low VRAM)
+
+## A Get Going Fast Application
+
+### [Quick Setup Helper → GetGoingFast.pro/tools/yue2](https://getgoingfast.pro/tools/yue2/)
+
+The guided Windows installer is a separate member download. This public repository contains source and manual setup instructions, not a quick installer or model weights.
 
 Create songs from lyrics and a musical style, make instrumentals with an optional adapter, and edit ABC compositions. Windows / NVIDIA / native audio.cpp GGUF inference. No ComfyUI, PyTorch installation or CUDA compilation is used by this app.
 
-## Install and run
+## Manual installation from source
 
-1. Download the small installer ZIP from [Get Going Fast](https://getgoingfast.pro/tools/yue2/), or clone this repository and use its installer.
-2. Extract to a writable folder on your internal drive. Double-click **INSTALL.bat**. Keep the window open until setup finishes.
-3. Double-click **RUN.bat**. The app files and private environment live in `GGF-YuE2` beside the BAT files.
+Use Windows 64-bit with a current NVIDIA driver. Install [Git for Windows](https://git-scm.com/download/win) and [uv](https://docs.astral.sh/uv/getting-started/installation/), then open **Command Prompt** in a writable folder on an internal drive:
 
-You do not need system Python or Git. The CMD installer bootstraps pinned UV and provisions **64-bit Python 3.12**. It downloads app source from Codeberg, falling back to GitHub, installs dependencies, downloads and verifies the official audio.cpp 0.8.2 Windows CUDA 12.4 runtime, and downloads the selected pinned model with resume and SHA-256 checks. It does not install the system CUDA Toolkit or alter other apps. Install a current NVIDIA driver yourself.
+1. Clone the source and create its private Python 3.12 environment:
+
+   ```bat
+   git clone https://codeberg.org/Cognibuild/GGF-YuE2.git
+   cd GGF-YuE2
+   uv venv --managed-python --python 3.12 .venv-3.12
+   ```
+
+2. Install dependencies and the pinned official audio.cpp 0.8.2 Windows CUDA 12.4 runtime:
+
+   ```bat
+   uv pip install --python .venv-3.12\Scripts\python.exe -r requirements.txt
+   uv pip check --python .venv-3.12\Scripts\python.exe
+   .venv-3.12\Scripts\python.exe setup_runtime.py
+   ```
+
+3. Download and verify a pinned model (Q8 is the default; Q4 uses less VRAM):
+
+   ```bat
+   .venv-3.12\Scripts\python.exe yue2_gguf_gui.py --download q8
+   .venv-3.12\Scripts\python.exe yue2_gguf_gui.py --check
+   ```
+
+   Use `--download q4` as well if you want that variant. The optional instrumental LoRA can be downloaded in Settings.
+
+4. Double-click `RUN.bat` from this source checkout, or run `.venv-3.12\Scripts\python.exe app.py`. The separate member installer automates the same setup without requiring Git or a system Python.
 
 Allow at least 12 GB of disk space plus song storage. Q8 is the default; Q4 uses less VRAM. Hardware, song length and settings affect speed and memory. There is no arbitrary duration cap in the UI. The native process exits after every song and releases its GPU memory.
 
-`INSTALL.bat q4`, `INSTALL.bat q8`, or `INSTALL.bat both` selects the model without the menu. The instrumental LoRA is optional: download it in Settings, enable it in Create, select Full plan, then use `[instrumental]` or section tags instead of lyrics.
-
-### Run directly from a source checkout
-
-The simplest path is still to run the repository's INSTALL.bat and RUN.bat. Alternatively, with UV already installed, run these commands **inside the source checkout**:
-
-```cmd
-uv venv --managed-python --python 3.12 .venv-3.12
-uv pip install --python .venv-3.12\Scripts\python.exe -r requirements.txt
-.venv-3.12\Scripts\python.exe setup_runtime.py
-.venv-3.12\Scripts\python.exe yue2_gguf_gui.py --download q8
-.venv-3.12\Scripts\python.exe yue2_gguf_gui.py --check
-.venv-3.12\Scripts\python.exe app.py
-```
+The instrumental LoRA is optional: download it in Settings, enable it in Create, select Full plan, then use `[instrumental]` or section tags instead of lyrics.
 
 ## Use it from your phone
 
@@ -41,7 +59,7 @@ The ABC Editor retains the original safe Save, Save As, import, generated-score 
 
 ## Update
 
-Use **Settings → Check for updates / Update and restart**, or close the app and run UPDATE.bat. Updates check repository commits and use the hosts' automatically generated archives. A normal source push is sufficient; there is no manually rebuilt code ZIP dependency. Models, environment, outputs, workspace files and private access settings are preserved. Existing source is backed up before replacement. Codeberg is primary; GitHub is the fallback regardless of the original install source. Drive is an independent backup, not a required step for ordinary code updates.
+Use **Settings → Check for updates / Update and restart**, or close the app and run `.venv-3.12\Scripts\python.exe update_app.py`. Updates check repository commits and use the hosts' automatically generated archives. A normal source push is sufficient; there is no manually rebuilt code ZIP dependency. Models, environment, outputs, workspace files and private access settings are preserved. Existing source is backed up before replacement. Codeberg is primary; GitHub is the fallback regardless of the original install source. Drive is an independent backup, not a required step for ordinary code updates.
 
 ## Licenses
 
